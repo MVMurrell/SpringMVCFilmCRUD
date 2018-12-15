@@ -16,8 +16,8 @@
 	<form:form action="filmById.do" method="POST">
 		<form:errors path="*" />
 		<br>
+		<form:input path="filmId"></form:input>
 		<form:label path="filmId">Film Id:</form:label>
-		<form:input path="FilmId" />
 		<br />
 
 		<input type="submit" value="Submit" />
@@ -25,8 +25,8 @@
 	<form:form action="filmByKeyword.do" method="POST">
 		<form:errors path="*" />
 		<br>
+		<form:input path="filmKeyword"></form:input>
 		<form:label path="filmKeyword">Film Keyword:</form:label>
-		<input path="FilmKeyword" />
 		<br />
 
 		<input type="submit" value="Submit" />
