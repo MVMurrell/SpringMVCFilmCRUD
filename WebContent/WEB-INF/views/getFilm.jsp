@@ -13,7 +13,7 @@
 </head>
 <body>
 	<!-- TODO: Add registration form -->
-	<form:form action="filmById.do" method="POST" modelAttribute="film">
+	<form:form action="filmById.do" method="POST">
 		<form:errors path="*" />
 		<br>
 		<form:label path="filmId">Film Id:</form:label>
@@ -22,8 +22,7 @@
 
 		<input type="submit" value="Submit" />
 	</form:form>
-	<form:form action="filmByKeyword.do" method="POST"
-		modelAttribute="film">
+	<form:form action="filmByKeyword.do" method="POST">
 		<form:errors path="*" />
 		<br>
 		<form:label path="filmKeyword">Film Keyword:</form:label>
