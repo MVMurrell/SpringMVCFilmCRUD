@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
@@ -18,7 +19,7 @@ public class FilmController {
 
 //	A user can enter a Film's ID and see the details of the film in a web page. If the film is not found, they see an appropriate message.
 
-	@RequestMapping(path="home.do", method = RequestMethod.GET)
+	@RequestMapping(path="home.do")
 	public String goHome() {
 		return "home.html";
 		
@@ -61,7 +62,17 @@ public class FilmController {
 			
 			return mv;
 		}
+		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
+		public ModelAndView editFilm(@RequestParam("id") String id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
+		ModelAndView mv = new ModelAndView("editFilm");
 		
+		Film filmId = dao.getFilmById(Integer.parseInt(id));
+		
+		
+		
+		
+			return mv;
+		}
 		
 		
 			
