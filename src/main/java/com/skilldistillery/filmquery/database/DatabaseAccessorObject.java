@@ -119,6 +119,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	@Override
 	public List<Film> getFilmsByKeyword(String keyword) {
 		List<Film> filmList = new ArrayList<>();
+		keyword = keyword.replaceAll(" ", "% %");
 		try {
 			Connection conn = DriverManager.getConnection(url, user, pass);
 			String sql = "select id, title from film where title like ? or description like ?";
