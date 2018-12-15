@@ -9,62 +9,67 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title></title>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+
+
+
+
 </head>
 <body>
 	<!-- TODO: Add registration form -->
 	<form action="filmById.do" method="POST">
-		<br>
-		<label id="filmById">Film Id:</label>
-		<input type="number" name="id"  id="filmById" required></input>
-		<br />
-
-		<input type="submit" value="Submit" />
+		<br> <label id="filmById">Film Id:</label> <input type="number"
+			name="id" id="filmById" required></input> <br /> <input
+			type="submit" value="Submit" />
 	</form>
 	<form action="filmByKeyword.do" method="POST">
-		<br>
-		<label id="filmByKeyword">Film Keyword:</label>
-		<input name="keyword" type="text" id="filmByKeyword"></input>
-		<br />
-
-		<input type="submit" value="Submit" />
+		<br> <label id="filmByKeyword">Film Keyword:</label> <input
+			name="keyword" type="text" id="filmByKeyword"></input> <br /> <input
+			type="submit" value="Submit" />
 	</form>
 
-<c:choose>
-	<c:when test="${not empty film }">
-		<c:forEach items="${film}" var="filmVar">
+	<c:choose>
+		<c:when test="${not empty film }">
+			<c:forEach items="${film}" var="filmVar">
 
 
 
-			<ul>
-				<li >Id: ${filmVar.id}</li>
-				<li>Title: ${filmVar.title}</li>
-				<li>Rating: ${filmVar.rating}</li>
-				<li>Category: ${filmVar.category}</li>
-				<li>Description: ${filmVar.description}</li>
-			</ul>
-			<div>
-			<form:form action="delete.do" method="Post">
-				<input type="hidden" name="delete" value="${filmVar.id }"  />
-				<input type="submit" value="Delete Film" />
-			</form:form>
-			</div>
-			<div>
-			<form:form action="editFilm.do" method="Post" >
-				<input type="hidden" name="editFilm" value="${filmVar}"  />
-				<input type="submit" value="Edit Film" />
-			</form:form>
-			</div>
+				<ul>
+					<li>Id: ${filmVar.id}</li>
+					<li>Title: ${filmVar.title}</li>
+					<li>Rating: ${filmVar.rating}</li>
+					<li>Category: ${filmVar.category}</li>
+					<li>Description: ${filmVar.description}</li>
+				</ul>
+				<div>
+					<form:form action="delete.do" method="Post">
+						<input type="hidden" name="delete" value="${filmVar.id }" />
+						<input type="submit" value="Delete Film" />
+					</form:form>
+				</div>
+				<div>
+					<form:form action="editFilm.do" method="Post">
+						<input type="hidden" name="editFilm" value="${filmVar}" />
+						<input type="submit" value="Edit Film" />
+					</form:form>
+				</div>
 
 
-		</c:forEach>
-	</c:when>
-	
-	<c:otherwise>
-		<h4>No Film was Found</h4>
-	</c:otherwise>
-</c:choose>
-	
+			</c:forEach>
+		</c:when>
+
+		<c:otherwise>
+			<h4>No Film was Found</h4>
+		</c:otherwise>
+	</c:choose>
+
 	<c:if test="${not empty deletedFilm }">
 		<h4>${deletedFilm}</h4>
 	</c:if>

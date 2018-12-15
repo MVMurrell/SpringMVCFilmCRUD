@@ -41,6 +41,13 @@ public class FilmController {
 			return mv;
 			
 		}
+		@RequestMapping(path="editFilm.do", method = RequestMethod.GET)
+		public ModelAndView editFilm() {
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("editFilm");
+			return mv;
+			
+		}
 		@RequestMapping(path="filmById.do", method=RequestMethod.POST)
 		public ModelAndView createFilm(int id) {
 			Film film = dao.getFilmById(id);
@@ -80,6 +87,7 @@ public class FilmController {
 		dummyFilm.setLength(length);
 		dummyFilm.setRating(rating);
 		dummyFilm.setRating(category);
+		
 		Film film = dao.editFilm(dummyFilm);
 		mv.addObject("film", film );
 			return mv;
@@ -94,7 +102,11 @@ public class FilmController {
 			newFilm.setYear(year);
 			newFilm.setLength(length);
 			newFilm.setRating(rating);
-			newFilm.setRating(category);
+			newFilm.setCategory(category);
+			newFilm.setLanguage_id(1);
+			newFilm.setReplacement_cost(3);
+			newFilm.setRental_rate(4);
+			newFilm.setRental_duration(2);
 			newFilm = dao.createFilm(newFilm);
 			mv.addObject("film", newFilm);
 			return mv;
