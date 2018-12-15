@@ -21,5 +21,6 @@ public interface DatabaseAccessor {
   public void printAllMovies ();
   public Film createFilm(Film film);
   public boolean deleteFilm(Film film);
+  public Film editFilm(Film film);
   
 }

@@ -508,6 +508,45 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		  }
 		  return film;
 	}
+	@Override
+	public Film editFilm(Film film) {
+		Connection conn = null;
+		try {
+			conn = DriverManager.getConnection(url, user, pass);
+			conn.setAutoCommit(false); // START TRANSACTION
+			String sql = "UPDATE film "
+					+ " SET (title=? "
+					+ ", description=? "
+					+ ", release_year=? "
+					+ ", length=? "
+					+ ", rating=? "
+					+ ", category=? "
+					+ ") "
+					+ " WHERE id=?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, film.getTitle());
+			stmt.setString(2, film.getDescription());
+			stmt.setInt(3, film.getYear());
+			stmt.setInt(4, film.getLength());
+			stmt.setString(5, film.getRating());
+			stmt.setString(6, film.getCategory());
+			stmt.setInt(7, film.getId());
+			int updateCount = stmt.executeUpdate();
+			if (updateCount == 1) {
+				conn.commit();
+			}
+		} catch (SQLException sqle) {
+			sqle.printStackTrace();
+			if (conn != null) {
+				try { conn.rollback(); }
+				catch (SQLException sqle2) {
+					System.err.println("Error trying to rollback");
+				}
+			}
+			throw new RuntimeException("Error updating " + film);
+		}
+		return film;
+	}
 
 	@Override
 	public boolean deleteFilm(Film film) {
