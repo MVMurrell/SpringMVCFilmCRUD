@@ -1,5 +1,8 @@
 package com.skilldistillery.filmquery.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -43,7 +46,9 @@ public class FilmController {
 			Film film = dao.getFilmById(id);
 			System.out.println(id);
 			ModelAndView mv = new ModelAndView("getFilm");
-			mv.addObject(film);
+			List<Film> films = new ArrayList<>();
+			films.add(film);
+			mv.addObject("film",films);
 			return mv;
 		}
 		@RequestMapping(path="delete.do", method=RequestMethod.POST)
@@ -65,14 +70,16 @@ public class FilmController {
 			return mv;
 		}
 		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
-		public ModelAndView editFilm(@RequestParam("id") String id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
+		public ModelAndView editFilm(@RequestParam("id") int id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
 		ModelAndView mv = new ModelAndView("editFilm");
-		int filmId = Integer.parseInt(id);
-//		Film dummyFilm = new Film();
-		
-		
-		
-		
+		Film dummyFilm = new Film();
+		dummyFilm.setId(id);
+		dummyFilm.setTitle(title);
+		dummyFilm.setDescription(description);
+		dummyFilm.setYear(year);
+		dummyFilm.setLength(length);
+		dummyFilm.setRating(rating);
+		dummyFilm.setRating(category);
 		
 			return mv;
 		}
