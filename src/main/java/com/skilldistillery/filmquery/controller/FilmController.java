@@ -19,9 +19,8 @@ public class FilmController {
 //	A user can enter a Film's ID and see the details of the film in a web page. If the film is not found, they see an appropriate message.
 
 	@RequestMapping(path="home.do", method = RequestMethod.GET)
-	public ModelAndView goHome() {
-		ModelAndView mv = new ModelAndView("home.html");
-		return mv;
+	public String goHome() {
+		return "home.html";
 		
 	}
 		@RequestMapping(path="getFilm.do", method = RequestMethod.GET)
@@ -51,8 +50,20 @@ public class FilmController {
 			boolean filmB = dao.deleteFilm(film);
 			ModelAndView mv = new ModelAndView("getFilm");
 			
+			if (filmB) {
+				String message = "Film Deleted";
+				mv.addObject("deletedFilm",message);
+			}
+			else {
+				String message = "Delete Failed";
+				mv.addObject("deletedFilm",message);
+			}
+			
 			return mv;
 		}
+		
+		
+		
 			
 		}
 	
