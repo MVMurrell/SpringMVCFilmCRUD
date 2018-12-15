@@ -16,16 +16,16 @@
 	<form action="filmById.do" method="POST">
 		<form:errors path="*" />
 		<br>
-		<label id="filmId">Film Id:</label>
-		<input type="number" id="filmId"></input>
+		<label id="filmById">Film Id:</label>
+		<input name="id" type="number" id="filmById"></input>
 		<br />
 
 		<input type="submit" value="Submit" />
 	</form>
 	<form action="filmByKeyword.do" method="POST">
 		<br>
-		<label id="filmKeyword">Film Keyword:</label>
-		<input type="text" id="filmKeyword"></input>
+		<label id="filmByKeyword">Film Keyword:</label>
+		<input name="keyword" type="text" id="filmByKeyword"></input>
 		<br />
 
 		<input type="submit" value="Submit" />
@@ -45,16 +45,16 @@
 				<li>${filmVar.description}</li>
 			</ul>
 			<div>
-			<form:form action="delete.do" method="Post" modelAttribute="film">
+			<form action="delete.do" method="Post">
 				<input name="delete" value="${film.id }" type="hidden" />
 				<input type="submit" value="Delete Film" />
-			</form:form>
+			</form>
 			</div>
 			<div>
-			<form:form action="editFilm.do" method="Post" modelAttribute="film">
+			<form action="editFilm.do" method="Post" >
 				<input name="editFilm" value="${film.id }" type="hidden" />
 				<input type="submit" value="Edit Film" />
-			</form:form>
+			</form>
 			</div>
 
 
