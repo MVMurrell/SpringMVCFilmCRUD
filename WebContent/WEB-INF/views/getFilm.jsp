@@ -13,27 +13,26 @@
 </head>
 <body>
 	<!-- TODO: Add registration form -->
-	<form:form action="filmById.do" method="POST">
+	<form action="filmById.do" method="POST">
 		<form:errors path="*" />
 		<br>
-		<form:input path="filmId"></form:input>
-		<form:label path="filmId">Film Id:</form:label>
+		<label id="filmId">Film Id:</label>
+		<input type="number" id="filmId"></input>
 		<br />
 
 		<input type="submit" value="Submit" />
-	</form:form>
-	<form:form action="filmByKeyword.do" method="POST">
-		<form:errors path="*" />
+	</form>
+	<form action="filmByKeyword.do" method="POST">
 		<br>
-		<form:input path="filmKeyword"></form:input>
-		<form:label path="filmKeyword">Film Keyword:</form:label>
+		<label id="filmKeyword">Film Keyword:</label>
+		<input type="text" id="filmKeyword"></input>
 		<br />
 
 		<input type="submit" value="Submit" />
-	</form:form>
+	</form>
 
-
-	<c:if test="${not empty filmVar }">
+<c:choose>
+	<c:when test="${not empty film }">
 		<c:forEach items="${film}" var="filmVar">
 
 
@@ -60,11 +59,12 @@
 
 
 		</c:forEach>
-	</c:if>
+	</c:when>
 	
 	<c:otherwise>
-		<H4>No Film was Found</H2>
+		<h4>No Film was Found</h4>
 	</c:otherwise>
+</c:choose>
 	
 	<c:if test="${not empty deletedFilm }">
 		<h4>${deletedFilm}</h4>
