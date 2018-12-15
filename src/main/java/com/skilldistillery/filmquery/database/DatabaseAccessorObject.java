@@ -535,6 +535,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			if (updateCount == 1) {
 				conn.commit();
 			}
+			film = getFilmById(film.getId());
 		} catch (SQLException sqle) {
 			sqle.printStackTrace();
 			if (conn != null) {
@@ -545,6 +546,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			}
 			throw new RuntimeException("Error updating " + film);
 		}
+		
 		return film;
 	}
 
