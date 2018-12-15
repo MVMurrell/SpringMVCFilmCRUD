@@ -13,27 +13,26 @@
 </head>
 <body>
 	<!-- TODO: Add registration form -->
-	<form:form action="filmById.do" method="POST">
+	<form action="filmById.do" method="POST">
 		<form:errors path="*" />
 		<br>
-		<form:input path="filmId"></form:input>
-		<form:label path="filmId">Film Id:</form:label>
+		<label id="filmById">Film Id:</label>
+		<input name="id" type="number" id="filmById"></input>
 		<br />
 
 		<input type="submit" value="Submit" />
-	</form:form>
-	<form:form action="filmByKeyword.do" method="POST">
-		<form:errors path="*" />
+	</form>
+	<form action="filmByKeyword.do" method="POST">
 		<br>
-		<form:input path="filmKeyword"></form:input>
-		<form:label path="filmKeyword">Film Keyword:</form:label>
+		<label id="filmByKeyword">Film Keyword:</label>
+		<input name="keyword" type="text" id="filmByKeyword"></input>
 		<br />
 
 		<input type="submit" value="Submit" />
-	</form:form>
+	</form>
 
-
-	<c:if test="${not empty filmVar }">
+<c:choose>
+	<c:when test="${not empty film }">
 		<c:forEach items="${film}" var="filmVar">
 
 
@@ -46,25 +45,26 @@
 				<li>${filmVar.description}</li>
 			</ul>
 			<div>
-			<form:form action="delete.do" method="Post" modelAttribute="film">
+			<form action="delete.do" method="Post">
 				<input name="delete" value="${film.id }" type="hidden" />
 				<input type="submit" value="Delete Film" />
-			</form:form>
+			</form>
 			</div>
 			<div>
-			<form:form action="editFilm.do" method="Post" modelAttribute="film">
+			<form action="editFilm.do" method="Post" >
 				<input name="editFilm" value="${film.id }" type="hidden" />
 				<input type="submit" value="Edit Film" />
-			</form:form>
+			</form>
 			</div>
 
 
 		</c:forEach>
-	</c:if>
+	</c:when>
 	
 	<c:otherwise>
-		<H4>No Film was Found</H2>
+		<h4>No Film was Found</h4>
 	</c:otherwise>
+</c:choose>
 	
 	<c:if test="${not empty deletedFilm }">
 		<h4>${deletedFilm}</h4>
