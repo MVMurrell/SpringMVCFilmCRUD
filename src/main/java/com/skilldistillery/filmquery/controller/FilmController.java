@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
 @Controller
@@ -96,6 +97,7 @@ public class FilmController {
 		public ModelAndView createFilm(@RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
 			ModelAndView mv = new ModelAndView("createFilm");
 			Film newFilm = new Film();
+			List<Actor> cast = new ArrayList<>(dao.getActorsByFilmId(1));
 			newFilm.setId(0);
 			newFilm.setTitle(title);
 			newFilm.setDescription(description);
@@ -107,6 +109,8 @@ public class FilmController {
 			newFilm.setReplacement_cost(3);
 			newFilm.setRental_rate(4);
 			newFilm.setRental_duration(2);
+			newFilm.setSpecial_features("none");
+			newFilm.setCast(cast);
 			newFilm = dao.createFilm(newFilm);
 			mv.addObject("film", newFilm);
 			return mv;
