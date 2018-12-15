@@ -39,11 +39,11 @@ public class FilmController {
 			
 		}
 		@RequestMapping(path="filmById.do", method=RequestMethod.POST)
-		public ModelAndView createFilm(String id) {
-			int filmId = Integer.parseInt(id);
-			Film film = dao.getFilmById(filmId);
+		public ModelAndView createFilm(int id) {
+			Film film = dao.getFilmById(id);
+			System.out.println(id);
 			ModelAndView mv = new ModelAndView("getFilm");
-			mv.addObject(film)
+			mv.addObject(film);
 			return mv;
 		}
 		@RequestMapping(path="delete.do", method=RequestMethod.POST)
