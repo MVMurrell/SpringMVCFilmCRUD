@@ -43,7 +43,7 @@ public class FilmController {
 			int filmId = Integer.parseInt(id);
 			Film film = dao.getFilmById(filmId);
 			ModelAndView mv = new ModelAndView("getFilm");
-			
+			mv.addObject(film)
 			return mv;
 		}
 		@RequestMapping(path="delete.do", method=RequestMethod.POST)
@@ -64,17 +64,18 @@ public class FilmController {
 			
 			return mv;
 		}
-//		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
-//		public ModelAndView editFilm(@RequestParam("id") String id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
-//		ModelAndView mv = new ModelAndView("editFilm");
-//		Film filmId = dao.getFilmById(Integer.parseInt(id));
-//		filmId.set
-//		
-//		
-//		
-//		
-//			return mv;
-//		}
+		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
+		public ModelAndView editFilm(@RequestParam("id") String id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
+		ModelAndView mv = new ModelAndView("editFilm");
+		int filmId = Integer.parseInt(id);
+//		Film dummyFilm = new Film();
+		
+		
+		
+		
+		
+			return mv;
+		}
 		
 		
 			
