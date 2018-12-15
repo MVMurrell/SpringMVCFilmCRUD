@@ -23,7 +23,7 @@
 		</div>
 		<div>
 		<label id="year">Film Year:</label>
-		<input type="number" id="year" name="year" value="1900"><input>
+		<input type="number" id="year" name="year" value="1900"></input>
 		</div>
 		<div>
 		<label id="length">Film Length:</label>
@@ -36,7 +36,9 @@
 		<div>
 		<label id="category">Film Category:</label>
 		<input type="text" id="category" name="category" value="Family"></input>
+		</div>
 		<input type="submit" value="Submit" />
+		
 	</form>
 	
 
