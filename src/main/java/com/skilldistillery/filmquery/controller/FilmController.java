@@ -80,11 +80,35 @@ public class FilmController {
 		dummyFilm.setLength(length);
 		dummyFilm.setRating(rating);
 		dummyFilm.setRating(category);
+		Film film = dao.editFilm(dummyFilm);
+		mv.addObject("film", film );
+			return mv;
+		}
+		@RequestMapping(path="createFilm.do" , method=RequestMethod.POST)
+		public ModelAndView createFilm(@RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
+			ModelAndView mv = new ModelAndView("createFilm");
+			Film newFilm = new Film();
+			newFilm.setId(0);
+			newFilm.setTitle(title);
+			newFilm.setDescription(description);
+			newFilm.setYear(year);
+			newFilm.setLength(length);
+			newFilm.setRating(rating);
+			newFilm.setRating(category);
+			newFilm = dao.createFilm(newFilm);
+			mv.addObject("film", newFilm);
+			return mv;
+		}
 		
+		@RequestMapping(path="filmByKeyword.do", method=RequestMethod.POST)
+		public ModelAndView getFilmByKW(String keyword){
+			List<Film> films = new ArrayList<>();
+			films = dao.getFilmsByKeyword(keyword);
+			ModelAndView mv = new ModelAndView("getFilm");
+			mv.addObject("film",films);
 			return mv;
 		}
 		
 		
-			
 		}
 	
