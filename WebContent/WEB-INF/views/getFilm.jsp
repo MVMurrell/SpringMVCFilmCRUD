@@ -56,7 +56,7 @@
 				</div>
 				<div>
 					<form:form action="editFilm.do" method="Post">
-						<input type="hidden" name="editFilm" value="${filmVar}" />
+						<input type="hidden" name="editFilm" value="${filmVar.id}" />
 						<input type="submit" value="Edit Film" />
 					</form:form>
 				</div>
