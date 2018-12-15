@@ -14,40 +14,64 @@
 <body>
 	<!-- TODO: Add registration form -->
 	<form:form action="filmById.do" method="POST" modelAttribute="film">
-	<form:errors path="*"/>
-	<br>
+		<form:errors path="*" />
+		<br>
 		<form:label path="filmId">Film Id:</form:label>
 		<form:input path="FilmId" />
 		<br />
-		
+
 		<input type="submit" value="Submit" />
 	</form:form>
-	<form:form action="filmByKeyword.do" method="POST" modelAttribute="film">
-	<form:errors path="*"/>
-	<br>
+	<form:form action="filmByKeyword.do" method="POST"
+		modelAttribute="film">
+		<form:errors path="*" />
+		<br>
 		<form:label path="filmKeyword">Film Keyword:</form:label>
 		<input path="FilmKeyword" />
 		<br />
-		
+
 		<input type="submit" value="Submit" />
 	</form:form>
-	
-	<c:if test="${not empty film }">
-	<ul>
-		<li>${film.id}</li>
-		<li>${film.title}</li>
-		<li>${film.rating}</li>
-		<li>${film.category}</li>
-		<li>${film.description}</li>
-	</ul>
-		<form:form action="delete.do" method="Post" modelAttribute="film">
-		<input name="delete" value ="${film.id }" type="hidden"/>
-		<input type="submit" value="Delete Film" />
-		</form:form>
-	
-	
+
+
+	<c:if test="${not empty filmVar }">
+		<c:forEach items="${film}" var="filmVar">
+
+
+
+			<ul>
+				<li>${filmVar.id}</li>
+				<li>${filmVar.title}</li>
+				<li>${filmVar.rating}</li>
+				<li>${filmVar.category}</li>
+				<li>${filmVar.description}</li>
+			</ul>
+			<div>
+			<form:form action="delete.do" method="Post" modelAttribute="film">
+				<input name="delete" value="${film.id }" type="hidden" />
+				<input type="submit" value="Delete Film" />
+			</form:form>
+			</div>
+			<div>
+			<form:form action="editFilm.do" method="Post" modelAttribute="film">
+				<input name="editFilm" value="${film.id }" type="hidden" />
+				<input type="submit" value="Edit Film" />
+			</form:form>
+			</div>
+
+
+		</c:forEach>
 	</c:if>
 	
+	<c:otherwise>
+		<H4>No Film was Found</H2>
+	</c:otherwise>
 	
+	<c:if test="${not empty deletedFilm }">
+		<h4>${deletedFilm}</h4>
+	</c:if>
+
+	<a href="home.do">Home</a>
+
 </body>
 </html>
