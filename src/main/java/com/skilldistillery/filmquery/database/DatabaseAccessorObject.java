@@ -13,9 +13,12 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.springframework.stereotype.Component;
+
 import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 
+@Component
 public class DatabaseAccessorObject implements DatabaseAccessor {
 	private static final String url = "jdbc:mysql://localhost:3306/sdvid?useSSL=false";
 	private String user = "student";

@@ -9,7 +9,13 @@
 
 	<mvc:annotation-driven />
 	<context:component-scan
-		base-package="com.skilldistillery.filmquery" />
+		base-package="com.skilldistillery.filmquery.controller" />
+	<context:component-scan
+		base-package="com.skilldistillery.filmquery.database" />
+	<context:component-scan
+		base-package="com.skilldistillery.filmquery.entities" />
+		
+		
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/WEB-INF/views/" />
