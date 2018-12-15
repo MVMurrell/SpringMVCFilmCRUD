@@ -109,6 +109,7 @@ public class FilmController {
 			newFilm.setReplacement_cost(3);
 			newFilm.setRental_rate(4);
 			newFilm.setRental_duration(2);
+			newFilm.setLanguage("English");
 			newFilm.setSpecial_features("none");
 			newFilm.setCast(cast);
 			newFilm = dao.createFilm(newFilm);
