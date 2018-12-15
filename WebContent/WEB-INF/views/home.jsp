@@ -1,49 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-
-<!-- TODO: Add the @taglib for form -->
-
 <!DOCTYPE html>
 <html>
 <head>
-<<<<<<< HEAD
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-
-=======
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Register</title>
->>>>>>> 292428d2e513540dbb46f472b4243321c0857ccb
+<title>Film Database Application by M, B & J</title>
 </head>
 <body>
-	<!-- TODO: Add registration form -->
-	<form:form action="register.do" method="POST" modelAttribute="user">
-	<form:errors path="*"/>
-	<br>
-		<form:label path="firstName">First Name:</form:label>
-		<form:input path="firstName" />
-		<%-- <form:errors path="firstName" /> --%>
-		<br />
-		<form:label path="lastName">Last Name:</form:label>
-		<form:input path="lastName" />
-		<%-- <form:errors path="lastName" /> --%>
-		<br />
-		<form:label path="age">Age:</form:label>
-		<form:input path="age" />
-		<%-- <form:errors path="age" /> --%>
-		<br />
-		<form:label path="email">Email:</form:label>
-		<form:input path="email" />
-		<%-- <form:errors path="email" /> --%>
-		<br />
-		<form:label path="password">Password:</form:label>
-		<form:input path="password" />
-		<%-- <form:errors path="password" /> --%>
-		<br />
-		<input type="submit" value="Register" />
-	</form:form>
+<h2>Film Database</h2>
+
+<div class="container">
+<div>
+<a href="getFilm.do" value= "Get Film">Search for a film by ID or Keyword</a>
+</div>
+<div>
+<a href="createFilm.do" value= "Create Film">Add a new film to the database</a>
+</div>
+<div>
+<a href="editFilm.do" value= "Edit Film">Add a new film to the database</a>
+</div>
+
+<h4>Created by Mike Murrell, Braiden Miller, and Jimmy Fruchterman</h4>
+</div>
+
 </body>
 </html>
