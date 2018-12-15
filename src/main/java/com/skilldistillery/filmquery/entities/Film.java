@@ -18,6 +18,9 @@ public class Film {
 	private String category;
 	private String language;
 	
+	public Film() {
+		super();
+	}
 	public Film(int id, String title, String description, int year, int language_id, int rental_duration,
 			double rental_rate, int length, double replacement_cost, String rating,
 			String special_features, List<Actor> cast, String language, String category) {

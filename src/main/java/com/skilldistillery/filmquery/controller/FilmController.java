@@ -18,21 +18,23 @@ public class FilmController {
 	private DatabaseAccessorObject dao;
 
 //	A user can enter a Film's ID and see the details of the film in a web page. If the film is not found, they see an appropriate message.
-
-	@RequestMapping(path="home.do")
+	
+	@RequestMapping(path="home.do", method=RequestMethod.GET)
 	public String goHome() {
-		return "home.html";
+		return "home";
 		
 	}
 		@RequestMapping(path="getFilm.do", method = RequestMethod.GET)
 		public ModelAndView getFilm() {
-			ModelAndView mv = new ModelAndView("getFilm");
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("getFilm");
 			return mv;
 
 	}
 		@RequestMapping(path="createFilm.do", method = RequestMethod.GET)
 		public ModelAndView createFilm() {
-			ModelAndView mv = new ModelAndView("createFilm");
+			ModelAndView mv = new ModelAndView();
+			mv.setViewName("createFilm");
 			return mv;
 			
 		}
@@ -62,17 +64,17 @@ public class FilmController {
 			
 			return mv;
 		}
-		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
-		public ModelAndView editFilm(@RequestParam("id") String id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
-		ModelAndView mv = new ModelAndView("editFilm");
-		
-		Film filmId = dao.getFilmById(Integer.parseInt(id));
-		
-		
-		
-		
-			return mv;
-		}
+//		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
+//		public ModelAndView editFilm(@RequestParam("id") String id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
+//		ModelAndView mv = new ModelAndView("editFilm");
+//		Film filmId = dao.getFilmById(Integer.parseInt(id));
+//		filmId.set
+//		
+//		
+//		
+//		
+//			return mv;
+//		}
 		
 		
 			
