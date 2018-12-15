@@ -26,7 +26,7 @@
 	<form:errors path="*"/>
 	<br>
 		<form:label path="filmKeyword">Film Keyword:</form:label>
-		<form:input path="FilmKeyword" />
+		<input path="FilmKeyword" />
 		<br />
 		
 		<input type="submit" value="Submit" />
@@ -41,7 +41,7 @@
 		<li>${film.description}</li>
 	</ul>
 		<form:form action="delete.do" method="Post" modelAttribute="film">
-		<form:input path="delete" value ="${film.id }" type="none"/>
+		<input name="delete" value ="${film.id }" type="hidden"/>
 		<input type="submit" value="Delete Film" />
 		</form:form>
 	
