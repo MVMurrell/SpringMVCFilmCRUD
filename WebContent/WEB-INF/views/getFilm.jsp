@@ -14,10 +14,9 @@
 <body>
 	<!-- TODO: Add registration form -->
 	<form action="filmById.do" method="POST">
-		<form:errors path="*" />
 		<br>
 		<label id="filmById">Film Id:</label>
-		<input name="id" type="number" id="filmById"></input>
+		<input type="number" name="id"  id="filmById" required></input>
 		<br />
 
 		<input type="submit" value="Submit" />
@@ -38,23 +37,23 @@
 
 
 			<ul>
-				<li>${filmVar.id}</li>
-				<li>${filmVar.title}</li>
-				<li>${filmVar.rating}</li>
-				<li>${filmVar.category}</li>
-				<li>${filmVar.description}</li>
+				<li >Id: ${filmVar.id}</li>
+				<li>Title: ${filmVar.title}</li>
+				<li>Rating: ${filmVar.rating}</li>
+				<li>Category: ${filmVar.category}</li>
+				<li>Description: ${filmVar.description}</li>
 			</ul>
 			<div>
-			<form action="delete.do" method="Post">
-				<input name="delete" value="${film.id }" type="hidden" />
+			<form:form action="delete.do" method="Post">
+				<input type="hidden" name="delete" value="${filmVar.id }"  />
 				<input type="submit" value="Delete Film" />
-			</form>
+			</form:form>
 			</div>
 			<div>
-			<form action="editFilm.do" method="Post" >
-				<input name="editFilm" value="${film.id }" type="hidden" />
+			<form:form action="editFilm.do" method="Post" >
+				<input type="hidden" name="editFilm" value="${filmVar}"  />
 				<input type="submit" value="Edit Film" />
-			</form>
+			</form:form>
 			</div>
 
 
