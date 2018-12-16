@@ -1,0 +1,36 @@
+#FilmHeader {
+	text-align: center;
+	padding: 150px 70px 150px 70px;
+	background-image:
+		url("https://images.unsplash.com/photo-1478720568477-152d9b164e26?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2100&q=80");
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;
+	background-size: cover;
+}
+
+#headerText {
+	font-family: 'Open Sans', sans-serif;
+	color: black;
+	outline-style: solid;
+	outline-width: thin;
+	background-color: rgba(255, 255, 255, 0.5);
+	width: 300px;
+	left: 35%;
+}
+
+}
+#choices {
+	margin-top: 200px;
+
+	/* background-blend-mode: darken; */
+	footer
+	{
+	padding-top
+	:
+	400px
+}
+
+#choices.card-title {
+	align-content: center;
+}
