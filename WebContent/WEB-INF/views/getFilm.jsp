@@ -41,6 +41,10 @@
 .navbar-brand {
 	color: white;
 }
+
+.nav>div {
+	padding: 5px
+}
 </style>
 
 
@@ -62,7 +66,7 @@
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
 						<li class="nav-item active"><a class="nav-link mr-sm-2"
-							href="create.do">Create Film</a></li>
+							href="createFilm.do">Create Film</a></li>
 					</ul>
 				</div>
 	</nav>
@@ -86,10 +90,10 @@
 							Keyword:</label><br> <input name="keyword" type="text"
 							id="filmByKeyword"></input>
 					</div>
-					<input type="submit" class="btn btn-primary" value="Submit" />
+				<input type="submit" class="btn btn-primary" value="Submit" />
+				</form>
 			</div>
 		</div>
-
 	</header>
 	<%-- <div class="container">
 		<form action="filmById.do" method="post">
@@ -135,20 +139,25 @@
 						</ul>
 					</ul>
 				</div>
-				<div>
-					<form:form action="delete.do" method="post">
-						<input type="hidden" name="delete" value="${filmVar.id }" />
-						<input type="submit" class="btn btn-primary" value="Delete Film" />
-					</form:form>
+				<div class="container ">
+					<div class="nav">
+						<div>
+							<form:form action="delete.do" method="post">
+								<input type="hidden" name="delete" value="${filmVar.id }" />
+								<input type="submit" class="btn btn-danger" value="Delete Film" />
+							</form:form>
+						</div>
+
+						<div>
+							<form:form action="editFilm.do" method="get">
+								<input type="hidden" class="btn btn-primary" name="id"
+									value="${filmVar.id}" />
+								<input type="submit" class="btn btn-primary" value="Edit Film" />
+							</form:form>
+						</div>
+					</div>
 				</div>
-				<div>
-					<form:form action="editFilm.do" method="get">
-						<input type="hidden" class="btn btn-primary" name="id"
-							value="${filmVar.id}" />
-						<br>
-						<input type="submit" class="btn btn-primary" value="Edit Film" />
-					</form:form>
-				</div>
+
 
 
 
