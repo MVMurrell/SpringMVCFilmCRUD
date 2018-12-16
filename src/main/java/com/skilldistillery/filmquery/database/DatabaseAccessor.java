@@ -17,7 +17,7 @@ public interface DatabaseAccessor {
   public String getInventoryNew(int fimlId);
   public String getInventoryDamaged(int filmId);
   public String getInventoryLost(int filmId);
-  public void printInventory(int filmId);
+  public List<String> printInventory(int filmId);
   public void printAllMovies ();
   public Film createFilm(Film film);
   public boolean deleteFilm(Film film);

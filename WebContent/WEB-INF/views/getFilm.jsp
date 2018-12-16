@@ -24,12 +24,12 @@
 </head>
 <body>
 	<!-- TODO: Add registration form -->
-	<form action="filmById.do" method="POST">
+	<form action="filmById.do" method="post">
 		<br> <label id="filmById">Film Id:</label> <input type="number"
-			name="id" id="filmById" required></input> <br /> <input
+			name="id" id="filmById" required min="1"></input> <br /> <input
 			type="submit" value="Submit" />
 	</form>
-	<form action="filmByKeyword.do" method="POST">
+	<form action="filmByKeyword.do" method="post">
 		<br> <label id="filmByKeyword">Film Keyword:</label> <input
 			name="keyword" type="text" id="filmByKeyword"></input> <br /> <input
 			type="submit" value="Submit" />
@@ -44,19 +44,23 @@
 				<ul>
 					<li>Id: ${filmVar.id}</li>
 					<li>Title: ${filmVar.title}</li>
+					<li>Year: ${filmVar.year}</li>
+					<li>Length: ${filmVar.length}</li>
 					<li>Rating: ${filmVar.rating}</li>
 					<li>Category: ${filmVar.category}</li>
 					<li>Description: ${filmVar.description}</li>
+					<li>Cast: ${filmVar.cast}</li>
+					<li>Inventory: ${filmVar.inventory}</li>
 				</ul>
 				<div>
-					<form:form action="delete.do" method="Post">
+					<form:form action="delete.do" method="post">
 						<input type="hidden" name="delete" value="${filmVar.id }" />
 						<input type="submit" value="Delete Film" />
 					</form:form>
 				</div>
 				<div>
-					<form:form action="editFilm.do" method="Post">
-						<input type="hidden" name="editFilm" value="${filmVar.id}" />
+					<form:form action="editFilm.do" method="get">
+						<input type="hidden" name="id" value="${filmVar.id}" />
 						<input type="submit" value="Edit Film" />
 					</form:form>
 				</div>
@@ -66,7 +70,9 @@
 		</c:when>
 
 		<c:otherwise>
+		<c:if test="${empty deletedFilm }">
 			<h4>No Film was Found</h4>
+		</c:if>
 		</c:otherwise>
 	</c:choose>
 

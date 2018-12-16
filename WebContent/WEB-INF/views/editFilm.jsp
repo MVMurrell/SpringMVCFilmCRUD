@@ -20,53 +20,62 @@
 <title>Edit Film</title>
 </head>
 <body>
+	
+	
+	<form action="editFilm.do" method="post">
+		<div>
+			<label id="title">Film title: </label> <input type="text" id="title"
+				name="title" value="${film.title }" required></input>
+		</div>
+		<div>
+			<label id="description">Film Description: </label> <input type="text"
+				id="description" name="description" value="${film.description }" required></input>
+		</div>
+		<div>
+			<label id="year">Film Year: </label> <input type="number" id="year"
+				name="year" value="${film.year }" min="1901" required ></input>
+		</div>
+		<div>
+			<label id="length">Film Length: </label> <input type="number"
+				id="length" name="length" value="${film.length }" required min="0"></input>
+		</div>
+		<div>
+			<label id="rating">Film Rating: </label> <input type="text"
+				id="rating" name="rating" value="${film.rating }" required></input>
+		</div>
 
-	<form action="editFilm.do" method="POST">
 		<div>
-			<label id="title">Film title:</label> <input type="text" id="title"
-				name="title" value="${editFilm.title}"></input>
+			<label id="id">Film Id: </label> <input type="hidden" name="id"
+				value="${film.id}" min="1" required/>
 		</div>
-		<div>
-			<label id="description">Film Description:</label> <input type="text"
-				id="description" name="description" value="${editFilm.description}"></input>
-		</div>
-		<div>
-			<label id="year">Film Year:</label> <input type="number" id="year"
-				name="year" value="${editFilm.year}"><input>
-		</div>
-		<div>
-			<label id="length">Film Length:</label> <input type="number"
-				id="length" name="length" value="${editFilm.length}"></input>
-		</div>
-		<div>
-			<label id="rating">Film Rating:</label> <input type="text"
-				id="rating" name="rating" value="${editFilm.rating}"></input>
-		</div>
-		<div>
-			<label id="category">Film Category:</label> <input type="text"
-				id="category" name="category" value="${editFilm.category}"></input>
-			<input type="hidden" name="id" value="${editFilm.id}"> <input
-				type="submit" value="Submit" />
+		<input type="submit" value="Submit" />
 	</form>
 
-
-	<c:if test="${film != null}">
+	<c:if test="${error != null }">
+		<h4>${error}</h4>
+		
+	</c:if>
+	<c:if test="${editFilm != null}">
 		<ul>
-			<li>${film.id}</li>
-			<li>${film.title}</li>
-			<li>${film.rating}</li>
-			<li>${film.category}</li>
-			<li>${film.description}</li>
+			<li>Id: ${editFilm.id}</li>
+			<li>Title: ${editFilm.title}</li>
+			<li>Year: ${editFilm.year}</li>
+			<li>Length: ${editFilm.length}</li>
+			<li>Rating: ${editFilm.rating}</li>
+			<li>Category: ${editFilm.category}</li>
+			<li>Description: ${editFilm.description}</li>
+			<li>Cast: ${editFilm.cast}</li>
+			<li>Inventory: ${editFilm.inventory}</li>
 		</ul>
 		<div>
-			<form action="delete.do" method="Post">
-				<input name="delete" value="${film.id }" type="hidden" /> <input
+			<form action="delete.do" method="post">
+				<input name="delete" value="${editFilm.id }" type="hidden" /> <input
 					type="submit" value="Delete Film" />
 			</form>
 		</div>
 		<div>
-			<form action="editFilm.do" method="Post">
-				<input name="editFilm" value="${film.id }" type="hidden" /> <input
+			<form action="editFilm.do" method="get">
+				<input name="id" value="${editFilm.id}" type="hidden" /> <input
 					type="submit" value="Edit Film" />
 			</form>
 		</div>

@@ -1,11 +1,11 @@
 package com.skilldistillery.filmquery.controller;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -43,8 +43,9 @@ public class FilmController {
 			
 		}
 		@RequestMapping(path="editFilm.do", method = RequestMethod.GET)
-		public ModelAndView editFilm() {
+		public ModelAndView editFilm(int id) {
 			ModelAndView mv = new ModelAndView();
+			mv.addObject("film", dao.getFilmById(id));
 			mv.setViewName("editFilm");
 			return mv;
 			
@@ -60,9 +61,8 @@ public class FilmController {
 			return mv;
 		}
 		@RequestMapping(path="delete.do", method=RequestMethod.POST)
-		public ModelAndView deleteFilm(String id) {
-			int filmId = Integer.parseInt(id);
-			Film film = dao.getFilmById(filmId);
+		public ModelAndView deleteFilm(int delete) {
+			Film film = dao.getFilmById(delete);
 			boolean filmB = dao.deleteFilm(film);
 			ModelAndView mv = new ModelAndView("getFilm");
 			
@@ -78,19 +78,31 @@ public class FilmController {
 			return mv;
 		}
 		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
-		public ModelAndView editFilm(@RequestParam("id") int id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating, @RequestParam("category") String category) {
+		//
+		public ModelAndView editFilm(@RequestParam("id") int id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating) {
 		ModelAndView mv = new ModelAndView("editFilm");
 		Film dummyFilm = new Film();
+		
+		
 		dummyFilm.setId(id);
-		dummyFilm.setTitle(title);
-		dummyFilm.setDescription(description);
-		dummyFilm.setYear(year);
-		dummyFilm.setLength(length);
-		dummyFilm.setRating(rating);
-		dummyFilm.setRating(category);
+		dummyFilm.setTitle(!title.equalsIgnoreCase("No Change") ? title : dao.getFilmById(id).getTitle() );
+		dummyFilm.setDescription(!description .equalsIgnoreCase("No Change") ? description : dao.getFilmById(id).getDescription());
+		dummyFilm.setYear(year != 0 ? year : dao.getFilmById(id).getYear());
+		dummyFilm.setLength(length != 0 ? length : dao.getFilmById(id).getLength());
+		dummyFilm.setRating(!rating.equalsIgnoreCase("No Change") ? rating : dao.getFilmById(id).getRating());
+		dummyFilm.setLanguage_id(1);
+		
 		
 		Film film = dao.editFilm(dummyFilm);
-		mv.addObject("film", film );
+		if(film != null) {
+			
+		mv.addObject("film", dummyFilm);
+		mv.addObject("editFilm", film );
+		}
+		else {
+			mv.addObject("film", dummyFilm);
+			mv.addObject("error", "Could not edit film, try again");
+		}
 			return mv;
 		}
 		@RequestMapping(path="createFilm.do" , method=RequestMethod.POST)
@@ -98,6 +110,7 @@ public class FilmController {
 			ModelAndView mv = new ModelAndView("createFilm");
 			Film newFilm = new Film();
 			List<Actor> cast = new ArrayList<>(dao.getActorsByFilmId(1));
+			
 			newFilm.setId(0);
 			newFilm.setTitle(title);
 			newFilm.setDescription(description);
@@ -113,7 +126,12 @@ public class FilmController {
 			newFilm.setSpecial_features("none");
 			newFilm.setCast(cast);
 			newFilm = dao.createFilm(newFilm);
+			if (newFilm != null) {
 			mv.addObject("film", newFilm);
+			}
+			else {
+				mv.addObject("error", "Could not create film, try again");
+			}
 			return mv;
 		}
 		

@@ -1,12 +1,15 @@
 package com.skilldistillery.filmquery.entities;
 
+import java.time.Year;
 import java.util.List;
+
+import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 
 public class Film {
 	private int id;
 	private String title;
 	private String description;
-	private int year;
+	private  int year;
 	private int language_id;
 	private int rental_duration;
 	private double rental_rate;
@@ -17,7 +20,8 @@ public class Film {
 	private List<Actor> cast;
 	private String category;
 	private String language;
-	
+	private List<String> inventory;
+
 	public Film() {
 		super();
 	}
@@ -25,6 +29,7 @@ public class Film {
 			double rental_rate, int length, double replacement_cost, String rating,
 			String special_features, List<Actor> cast, String language, String category) {
 		super();
+		DatabaseAccessorObject dao = new DatabaseAccessorObject();
 		this.id = id;
 		this.title = title;
 		this.description = description;
@@ -39,9 +44,16 @@ public class Film {
 		this.cast = cast;
 		this.category = category;
 		this.language = language;
+		this.inventory = dao.printInventory(id);
 		
 	}public List<Actor> getCast() {
 		return cast;
+	}
+	public List<String> getInventory() {
+		return inventory;
+	}
+	public void setInventory(List<String> inventory) {
+		this.inventory = inventory;
 	}
 	public String getCategory() {
 		return category;
@@ -164,7 +176,6 @@ public class Film {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((special_features == null) ? 0 : special_features.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + year;
 		return result;
 	}
 

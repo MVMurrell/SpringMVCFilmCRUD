@@ -1,11 +1,13 @@
 package com.skilldistillery.filmquery.database;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -412,21 +414,21 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	@Override
-	public void printInventory(int filmId) {
-		
+	public List<String> printInventory(int filmId) {
+		List<String> inventory = new ArrayList<>();
 		if(getInventoryNew(filmId) != null) {
-			System.out.println(getInventoryNew(filmId));
+			inventory.add(getInventoryNew(filmId));
 		}
 		if(getInventoryUsed(filmId) != null) {
-			System.out.println(getInventoryUsed(filmId));
+			inventory.add(getInventoryUsed(filmId));
 		}
 		if(getInventoryDamaged(filmId) != null) {
-			System.out.println(getInventoryDamaged(filmId));
+			inventory.add(getInventoryDamaged(filmId));
 		}
 		if(getInventoryLost(filmId) != null) {
-			System.out.println(getInventoryLost(filmId));
+			inventory.add(getInventoryLost(filmId));
 		}
-		
+		return inventory;
 	}
 
 	@Override
@@ -469,22 +471,23 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public Film createFilm(Film film) {
 		Connection conn = null;
 		  try {
+			  
 		    conn = DriverManager.getConnection(url, user, pass);
 		    conn.setAutoCommit(false); // START TRANSACTION
-		    String sql = "INSERT INTO film (title, description, release_year, language_id, length, rating, special_features) "
-		                     + " VALUES (?,?,?,?,?,?,?)";
+		    String sql = "INSERT INTO film (title, description, release_year, language_id, length, rating)  VALUES ( ?, ?, ?, ?, ?, ?)";
 		    PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		    
 		    stmt.setString(1, film.getTitle());
 		    stmt.setString(2, film.getDescription());
-		    stmt.setInt(3, film.getYear());
-		    stmt.setInt(4, film.getLanguage_id());
+		    stmt.setShort(3, (short)film.getYear());
+		    stmt.setShort(4, (short)film.getLanguage_id());
 //		    stmt.setInt(5, film.getRental_duration());
 //		    stmt.setInt(6, (int) film.getRental_rate());
-		    stmt.setInt(5, film.getLength());
+		    stmt.setShort(5, (short)film.getLength());
 //		    stmt.setInt(8, (int) film.getReplacement_cost());
 		    stmt.setString(6, film.getRating());
-		    stmt.setString(7, film.getSpecial_features());
 		    int updateCount = stmt.executeUpdate();
+		    System.out.println("Update count ="+updateCount);
 		    if (updateCount == 1) {
 		      ResultSet keys = stmt.getGeneratedKeys();
 		      if (keys.next()) {
@@ -497,56 +500,49 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		    }
 		    conn.commit(); // COMMIT TRANSACTION
 		  } catch (SQLException sqle) {
-		    sqle.printStackTrace();
+			  System.out.println(sqle);
 		    if (conn != null) {
 		      try { conn.rollback(); }
 		      catch (SQLException sqle2) {
 		        System.err.println("Error trying to rollback");
 		      }
 		    }
-		    throw new RuntimeException("Error inserting actor " + film);
+		    return film=null;
 		  }
 		  return film;
 	}
 	@Override
 	public Film editFilm(Film film) {
 		Connection conn = null;
+		System.out.println(film);
 		try {
 			conn = DriverManager.getConnection(url, user, pass);
 			conn.setAutoCommit(false); // START TRANSACTION
-			String sql = "UPDATE film "
-					+ " SET (title=? "
-					+ ", description=? "
-					+ ", release_year=? "
-					+ ", length=? "
-					+ ", rating=? "
-					+ ", category=? "
-					+ ") "
-					+ " WHERE id=?";
+			String sql = "UPDATE film SET title=?, description=?, length=? , rating=?  WHERE id=?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, film.getTitle());
 			stmt.setString(2, film.getDescription());
-			stmt.setInt(3, film.getYear());
-			stmt.setInt(4, film.getLength());
-			stmt.setString(5, film.getRating());
-			stmt.setString(6, film.getCategory());
-			stmt.setInt(7, film.getId());
-			int updateCount = stmt.executeUpdate();
-			if (updateCount == 1) {
-				conn.commit();
-			}
-			film = getFilmById(film.getId());
+//			stmt.setInt(3, film.getYear());
+			stmt.setShort(3, (short) film.getLength());
+			stmt.setString(4, film.getRating());
+			stmt.setInt(5, film.getId());
+		      int uc = stmt.executeUpdate();
+		      System.out.println("update count ="+uc);
+		      
+			conn.commit();
 		} catch (SQLException sqle) {
-			sqle.printStackTrace();
+			System.out.println(sqle);
 			if (conn != null) {
 				try { conn.rollback(); }
 				catch (SQLException sqle2) {
 					System.err.println("Error trying to rollback");
 				}
 			}
-			throw new RuntimeException("Error updating " + film);
+			return film=null;
 		}
 		
+		
+		film = getFilmById(film.getId());
 		return film;
 	}
 
@@ -569,7 +565,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		    
 		  }
 		  catch (SQLException sqle) {
-		    sqle.printStackTrace();
 		    if (conn != null) {
 		      try { conn.rollback(); }
 		      catch (SQLException sqle2) {
