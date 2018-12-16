@@ -30,7 +30,6 @@ header {
   color: white;
   font-size: 50px;
   background: url("https://ak3.picdn.net/shutterstock/videos/8073133/thumb/1.jpg");
-
 	text-align: center;
 	padding: 150px 70px 150px 70px;
 	background-repeat: no-repeat;
