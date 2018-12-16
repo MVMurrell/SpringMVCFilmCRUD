@@ -19,9 +19,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
-	
-	
-	<style>
+
+
+<style>
 #FilmHeader {
 	text-align: center;
 	padding: 150px 70px 150px 70px;
@@ -36,11 +36,10 @@
 
 #headerText {
 	color: white;
-	
 }
 
-.navbar-brand{
-color: white;
+.navbar-brand {
+	color: white;
 }
 </style>
 
@@ -50,41 +49,47 @@ color: white;
 <body>
 	<!-- TODO: Add registration form -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">BJM Film Rentals</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
-      <li class="nav-item active">
-        <a class="nav-link mr-sm-2" href="home.do">Home</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+		<a class="navbar-brand">BJM Film Rentals</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active"><a class="nav-link mr-sm-2"
+					href="home.do">Home</a></li>
+				<div class="collapse navbar-collapse" id="navbarNav">
+					<ul class="navbar-nav">
+						<li class="nav-item active"><a class="nav-link mr-sm-2"
+							href="create.do">Create Film</a></li>
+					</ul>
+				</div>
+	</nav>
 
 	<header>
-	<div id="FilmHeader">
-	
-		<h1 id="headerText">Find Film By ID or Keyword</h1>
-		<div class="row">
-		<form class="col" action="filmById.do" method="post">
-			<div class="form-group">
-				<label style="color:white;" id="filmById">Film ID:</label><br> <input type="number" name="id"
-					id="filmById" required min="1"></input>
-			</div>
-			<input type="submit" class="btn btn-primary" value="Submit" />
-		</form>
+		<div id="FilmHeader">
 
-		<form class="col" action="filmByKeyword.do" method="post">
-			<div class="form-group">
-				<label style="color:white;" id="filmByKeyword">Film Keyword:</label><br> <input
-					name="keyword" type="text" id="filmByKeyword"></input>
-			</div>
-			<input type="submit" class="btn btn-primary" value="Submit" />
+			<h1 id="headerText">Find Film By ID or Keyword</h1>
+			<div class="row">
+				<form class="col" action="filmById.do" method="post">
+					<div class="form-group">
+						<label style="color: white;" id="filmById">Film ID:</label><br>
+						<input type="number" name="id" id="filmById" required min="1"></input>
+					</div>
+					<input type="submit" class="btn btn-primary" value="Submit" />
+				</form>
+
+				<form class="col" action="filmByKeyword.do" method="post">
+					<div class="form-group">
+						<label style="color: white;" id="filmByKeyword">Film
+							Keyword:</label><br> <input name="keyword" type="text"
+							id="filmByKeyword"></input>
+					</div>
+					<input type="submit" class="btn btn-primary" value="Submit" />
 			</div>
 		</div>
-		
+
 	</header>
 	<%-- <div class="container">
 		<form action="filmById.do" method="post">
@@ -122,6 +127,12 @@ color: white;
 							${filmVar.description}</li>
 						<li class="list-group-item">Cast: ${filmVar.cast}</li>
 						<li class="list-group-item">Inventory: ${filmVar.inventory}</li>
+
+						<ul class="list-group list-group-flush">
+							<c:forEach items="${editFilm.cast}" var="cast">
+								<li class="list-group-item">${cast}</li>
+							</c:forEach>
+						</ul>
 					</ul>
 				</div>
 				<div>
@@ -140,8 +151,12 @@ color: white;
 				</div>
 
 
+
+
 			</c:forEach>
 		</c:when>
+
+
 
 		<c:otherwise>
 			<c:if test="${empty deletedFilm }">
