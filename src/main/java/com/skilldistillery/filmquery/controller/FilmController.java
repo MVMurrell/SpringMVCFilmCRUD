@@ -79,7 +79,9 @@ public class FilmController {
 		}
 		@RequestMapping(path="editFilm.do" , method=RequestMethod.POST)
 		//
-		public ModelAndView editFilm(@RequestParam("id") int id, @RequestParam("title")String title, @RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length, @RequestParam("rating") String rating) {
+		public ModelAndView editFilm(@RequestParam("id") int id, @RequestParam("title")String title, 
+				@RequestParam("description") String description, @RequestParam("year") int year, @RequestParam("length") int length,
+				@RequestParam("rating") String rating, @RequestParam("category") String category) {
 		ModelAndView mv = new ModelAndView("editFilm");
 		Film dummyFilm = new Film();
 		
@@ -91,6 +93,7 @@ public class FilmController {
 		dummyFilm.setLength(length != 0 ? length : dao.getFilmById(id).getLength());
 		dummyFilm.setRating(!rating.equalsIgnoreCase("No Change") ? rating : dao.getFilmById(id).getRating());
 		dummyFilm.setLanguage_id(1);
+		dummyFilm.setCategory(category);
 		
 		
 		Film film = dao.editFilm(dummyFilm);

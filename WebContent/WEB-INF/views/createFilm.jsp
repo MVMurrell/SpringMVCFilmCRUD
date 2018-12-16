@@ -39,7 +39,6 @@
 <title>Create Film</title>
 </head>
 <body>
-
 <div class="background-image">
 <div class="navigation">
 <nav class="nav nav-tabs">
@@ -51,8 +50,6 @@
 </div>
 </div>
 	<div role="main" class="container">
-	
-	
 		<form action="createFilm.do" method="post">
 			<div class="form-group">
 				<label id="title">Film title:</label> <input type="text" id="title"
@@ -82,8 +79,6 @@
 			<input type="submit" class="btn btn-primary" value="Submit" />
 
 		</form>
-
-
 		<c:if test="${error != null }">
 			<h4>${error}</h4>
 		</c:if>
