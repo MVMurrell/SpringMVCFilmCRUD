@@ -90,8 +90,13 @@
 							Keyword:</label><br> <input name="keyword" type="text"
 							id="filmByKeyword"></input>
 					</div>
+<<<<<<< HEAD
 				<input type="submit" class="btn btn-primary" value="Submit" />
 				</form>
+=======
+					<input type="submit" class="btn btn-primary" value="Submit" />
+					</form>
+>>>>>>> d48722f5ac42b9fc3edd082951bcc28c9cdf04ef
 			</div>
 		</div>
 	</header>
