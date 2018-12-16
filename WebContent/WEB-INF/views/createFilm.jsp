@@ -13,33 +13,36 @@
 <body>
 
 	<form action="createFilm.do" method="post">
-		<div>
+		<div class="form-group">
 			<label id="title">Film title:</label> <input type="text" id="title"
 				name="title" value="The Lion King"></input>
 		</div>
-		<div>
-			<label id="description">Film Description:</label> <input type="text"
-				id="description" name="description"
-				value="A film of lions and kings" required></input>
-		</div>
-		<div>
+		<div class="form-group">
 			<label id="year">Film Year:</label> <input type="number" id="year"
 				name="year" value="1901" required min="1901"></input>
 		</div>
-		<div>
+		<div class="form-group">
 			<label id="length">Film Length:</label> <input type="number"
 				id="length" name="length" value="300" required min="0"></input>
 		</div>
-		<div>
+		<div class="form-group">
 			<label id="rating">Film Rating:</label> <input type="text"
 				id="rating" name="rating" value="G" required></input>
 		</div>
-		<div>
+		<div class="form-group">
 			<label id="category">Film Category:</label> <input type="text"
 				id="category" name="category" value="Family" required></input>
 		</div>
+		<div class="form-group" >
+			<label id="description">Film Description:</label> 
+			<textarea class="form-control" id="description" name="description" rows="3"
+			 value="A film of lions and kings" required></textarea>
+		</div>
 		<input type="submit" value="Submit" />
-
+<!-- <div class="form-group">
+    <label for="exampleTextarea">Example textarea</label>
+    <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+  </div> -->
 	</form>
 
 
