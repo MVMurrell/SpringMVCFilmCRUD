@@ -20,6 +20,64 @@
 
 <style type="text/css">
 
+#headerText {
+text-align: center;
+size: 100px;
+
+}
+header {
+  padding: 60px;
+  color: white;
+  font-size: 50px;
+  background: url("https://ak3.picdn.net/shutterstock/videos/8073133/thumb/1.jpg");
+
+	text-align: center;
+	padding: 150px 70px 150px 70px;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;
+	background-size: cover;
+	
+}
+
+
+
+#topNav {
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+	background-color: black;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+}
+
+#topNav > .navbar-brand{
+	color:white;
+
+}
+
+
+a:hover {
+  background-color: #555;
+  color: white;
+  
+}
+
+.container{
+padding-top: 50px;
+
+}
+.dropdown-menu{
+	min-width: 500px;
+}
+
+#bottomNav > div{
+	padding: 2px;
+
+
+}
+
 
 
 </style>
@@ -27,11 +85,19 @@
 <title>Edit Film</title>
 </head>
 <body>
-	<nav class="nav nav-tabs">
-		<a class="nav-item nav-link " href="home.do">Home</a> <a
-			class=" nav-item nav-link " href="createFilm.do">Create Film</a>
+	<nav class="nav nav-tabs" id="topNav">
+	<a class="navbar-brand">BJM Film Rentals</a>
+		<a class="nav-item nav-link " href="home.do">Home</a> 
+		<a class="nav-item nav-link active" href="editFilm.do">Edit Film</a> 
+		<a	class=" nav-item nav-link " href="createFilm.do">Create Film</a>
+		<a class=" nav-item nav-link " href="getFilm.do">Look Up a Film</a>
 
 	</nav>
+<header>
+	<div id="headerText">
+  <h1>Edit a Film</h1>
+	</div>
+</header>
 
 	<div role="main" class="container">
 
@@ -83,57 +149,57 @@
 		</c:if>
 		<br>
 		<div class="container">
-		<c:if test="${editFilm != null}">
-			<ul class="list-group">
-				<li class="list-group-item">Id: ${editFilm.id}</li>
-				<li class="list-group-item">Title: ${editFilm.title}</li>
-				<li class="list-group-item">Year: ${editFilm.year}</li>
-				<li class="list-group-item">Length: ${editFilm.length}</li>
-				<li class="list-group-item">Rating: ${editFilm.rating}</li>
-				<li class="list-group-item">Category: ${editFilm.category}</li>
-				<li class="list-group-item">Description: ${editFilm.description}</li>
-			</ul>
-			<div class="nav">
-			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
-					data-toggle="dropdown">
-					Cast: <span class="caret"></span>
-				</button>
+			<c:if test="${editFilm != null}">
+				<ul class="list-group">
+					<li class="list-group-item">Id: ${editFilm.id}</li>
+					<li class="list-group-item">Title: ${editFilm.title}</li>
+					<li class="list-group-item">Year: ${editFilm.year}</li>
+					<li class="list-group-item">Length: ${editFilm.length}</li>
+					<li class="list-group-item">Rating: ${editFilm.rating}</li>
+					<li class="list-group-item">Category: ${editFilm.category}</li>
+					<li class="list-group-item">Description: ${editFilm.description}</li>
+				</ul>
+				<div class="nav" id="bottomNav">
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							data-toggle="dropdown">
+							Cast: <span class="caret"></span>
+						</button>
 
-					<ul class="dropdown-menu ">
-				<c:forEach items="${editFilm.cast}" var="cast">
-						<li class="list-group-item">${cast}</li>
-				</c:forEach>
-					</ul>
-			</div>
-			
-			<div class="dropdown">
-				<button class="btn btn-primary dropdown-toggle" type="button"
-					data-toggle="dropdown">
-					Inventory: <span class="caret"></span>
-				</button>
+						<ul class="dropdown-menu ">
+							<c:forEach items="${editFilm.cast}" var="cast">
+								<li class="list-group-item">${cast}</li>
+							</c:forEach>
+						</ul>
+					</div>
 
-					<ul class="dropdown-menu ">
-				<c:forEach items="${editFilm.inventory}" var="inventory">
-						<li class="list-group-item">${inventory}</li>
-				</c:forEach>
-					</ul>
-			</div>
-				<div>
-					<form action="editFilm.do" method="get">
-						<input name="id" value="${editFilm.id}" type="hidden" /> <input
-							type="submit" class="btn btn-primary" value="Edit Film" />
-					</form>
+					<div class="dropdown">
+						<button class="btn btn-primary dropdown-toggle" type="button"
+							data-toggle="dropdown">
+							Inventory: <span class="caret"></span>
+						</button>
+
+						<ul class="dropdown-menu ">
+							<c:forEach items="${editFilm.inventory}" var="inventory">
+								<li class="list-group-item">${inventory}</li>
+							</c:forEach>
+						</ul>
+					</div>
+					<div>
+						<form action="editFilm.do" method="get">
+							<input name="id" value="${editFilm.id}" type="hidden" /> <input
+								type="submit" class="btn btn-primary" value="Edit Film" />
+						</form>
+					</div>
+					<div>
+						<form action="delete.do" method="post">
+							<input name="delete" value="${editFilm.id }" type="hidden" /> <input
+								type="submit" class="btn btn-danger" value="Delete Film" />
+						</form>
+					</div>
 				</div>
-				<div>
-					<form action="delete.do" method="post">
-						<input name="delete" value="${editFilm.id }" type="hidden" /> <input
-							type="submit" class="btn btn-danger" value="Delete Film" />
-					</form>
-				</div>
-			</div>
 
-		</c:if>
+			</c:if>
 		</div>
 		<c:if test="${not empty deletedFilm }">
 			<h4>${deletedFilm}</h4>
