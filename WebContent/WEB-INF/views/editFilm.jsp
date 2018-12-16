@@ -22,17 +22,22 @@
 
 #headerText {
 text-align: center;
+size: 100px;
 
 }
-.header {
+header {
   padding: 60px;
-  text-align: center;
   color: white;
   font-size: 50px;
   background: url("https://ak3.picdn.net/shutterstock/videos/8073133/thumb/1.jpg");
-	background-size: auto;
-	background-repeat: no-repeat;
 
+	text-align: center;
+	padding: 150px 70px 150px 70px;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-position: center;
+	background-size: cover;
+	
 }
 
 
@@ -44,6 +49,12 @@ text-align: center;
 	background-color: black;
 	width: 100%;
 	position: fixed;
+	z-index: 1;
+}
+
+#topNav > .navbar-brand{
+	color:white;
+
 }
 
 
@@ -75,15 +86,18 @@ padding-top: 50px;
 </head>
 <body>
 	<nav class="nav nav-tabs" id="topNav">
-		<a class="nav-item nav-link " href="home.do">Home</a> <a
-			class=" nav-item nav-link " href="createFilm.do">Create Film</a>
+	<a class="navbar-brand">BJM Film Rentals</a>
+		<a class="nav-item nav-link " href="home.do">Home</a> 
+		<a class="nav-item nav-link active" href="editFilm.do">Edit Film</a> 
+		<a	class=" nav-item nav-link " href="createFilm.do">Create Film</a>
+		<a class=" nav-item nav-link " href="getFilm.do">Look Up a Film</a>
 
 	</nav>
-<div class="header">
+<header>
 	<div id="headerText">
   <h1>Edit a Film</h1>
 	</div>
-</div>
+</header>
 
 	<div role="main" class="container">
 
@@ -143,8 +157,7 @@ padding-top: 50px;
 					<li class="list-group-item">Length: ${editFilm.length}</li>
 					<li class="list-group-item">Rating: ${editFilm.rating}</li>
 					<li class="list-group-item">Category: ${editFilm.category}</li>
-					<li class="list-group-item">Description:
-						${editFilm.description}</li>
+					<li class="list-group-item">Description: ${editFilm.description}</li>
 				</ul>
 				<div class="nav" id="bottomNav">
 					<div class="dropdown">
