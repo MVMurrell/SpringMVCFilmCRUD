@@ -15,7 +15,7 @@
 	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="createFilm.css">
-<style>
+<style type="text/css">
 	.background-image {
 	  position:relative;
 	  height:100vh;
@@ -34,6 +34,9 @@
 	}
 	.container {
 	padding-top: 25px;
+	}
+	.button {
+	margin: 10px;
 	}
 </style>
 <title>Create Film</title>
@@ -82,31 +85,35 @@
 		<c:if test="${error != null }">
 			<h4>${error}</h4>
 		</c:if>
+		<div class="container">
 		<c:if test="${film != null}">
-			<ul>
-				<li>Id: ${film.id}</li>
-				<li>Title: ${film.title}</li>
-				<li>Year: ${film.year}</li>
-				<li>Length: ${film.length}</li>
-				<li>Rating: ${film.rating}</li>
-				<li>Category: ${film.category}</li>
-				<li>Description: ${film.description}</li>
+			<ul class="list-group">
+				<li class="list-group-item">Id: ${film.id}</li>
+				<li class="list-group-item">Title: ${film.title}</li>
+				<li class="list-group-item">Year: ${film.year}</li>
+				<li class="list-group-item">Length: ${film.length}</li>
+				<li class="list-group-item">Rating: ${film.rating}</li>
+				<li class="list-group-item">Category: ${film.category}</li>
+				<li class="list-group-item">Description: ${film.description}</li>
 
 			</ul>
-			<div>
-				<form action="delete.do" method="post">
-					<input name="delete" value="${film.id }" type="hidden" /> <input
-						type="submit" value="Delete Film" />
-				</form>
-			</div>
-			<div>
+			<div class="nav">
+			<div class="button">
 				<form action="editFilm.do" method="get">
 					<input name="id" value="${film.id }" type="hidden" /> <input
-						type="submit" value="Edit Film" />
+						type="submit" value="Edit Film" class="btn btn-primary"/>
 				</form>
 			</div>
+			<div class="button">
+				<form action="delete.do" method="post">
+					<input name="delete" value="${film.id }" type="hidden" /> <input
+						type="submit" value="Delete Film" class="btn btn-danger"/>
+				</form>
+			</div>
+			</div>
 		</c:if>
-
+		</div>
+		
 
 		<c:if test="${not empty deletedFilm }">
 			<h4>${deletedFilm}</h4>
