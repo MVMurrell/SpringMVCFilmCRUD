@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!-- TODO: Add the @taglib for form -->
 
@@ -90,13 +91,10 @@
 							Keyword:</label><br> <input name="keyword" type="text"
 							id="filmByKeyword"></input>
 					</div>
-<<<<<<< HEAD
+
 				<input type="submit" class="btn btn-primary" value="Submit" />
 				</form>
-=======
-					<input type="submit" class="btn btn-primary" value="Submit" />
-					</form>
->>>>>>> d48722f5ac42b9fc3edd082951bcc28c9cdf04ef
+					
 			</div>
 		</div>
 	</header>
@@ -119,8 +117,8 @@
 		</form>
 	</div> --%>
 
-	<c:choose>
-		<c:when test="${not empty film }">
+		<c:choose>
+		<c:when test="${film[0].id > 0}">
 			<c:forEach items="${film}" var="filmVar">
 
 				<br>
@@ -137,11 +135,11 @@
 						<li class="list-group-item">Cast: ${filmVar.cast}</li>
 						<li class="list-group-item">Inventory: ${filmVar.inventory}</li>
 
-						<ul class="list-group list-group-flush">
-							<c:forEach items="${editFilm.cast}" var="cast">
+						<%-- <ul class="list-group list-group-flush">
+							<c:forEach items="${filmVar.cast}" var="cast">
 								<li class="list-group-item">${cast}</li>
 							</c:forEach>
-						</ul>
+						</ul> --%>
 					</ul>
 				</div>
 				<div class="container ">
@@ -169,19 +167,15 @@
 
 			</c:forEach>
 		</c:when>
-
-
-
 		<c:otherwise>
-			<c:if test="${empty deletedFilm }">
-				<h4>No Film was Found</h4>
-			</c:if>
+		<h4>Film Not Found</h4>
 		</c:otherwise>
-	</c:choose>
-
-	<c:if test="${not empty deletedFilm }">
+		</c:choose>
+		
+	<c:if test="${not empty deletedFilm}">
 		<h4>${deletedFilm}</h4>
 	</c:if>
+			
 
 	<!-- <a href="home.do">Home</a> -->
 
