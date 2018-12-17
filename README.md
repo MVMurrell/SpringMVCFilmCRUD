@@ -74,9 +74,6 @@ that data and insert it into the database, and then return the generated keys so
 can attach that ID to the film and then show the added film. This then gives two Bootstrap
 -generated buttons to either edit or delete. 
 
-Edit will use a GET method to call and load a page with boxes for changing the title, 
-year, length, rating, category, and description. We display the Id as well but don't allow
-the user to change it. Then when you select "
 
 
 
